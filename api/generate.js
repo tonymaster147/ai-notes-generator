@@ -40,7 +40,8 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' })
   }
 
-  const apiKey = process.env.GEMINI_API_KEY
+  // Strip BOM/whitespace that can sneak in when the env var is set via piped stdin
+  const apiKey = (process.env.GEMINI_API_KEY || '').replace(/^\uFEFF/, '').trim()
   if (!apiKey) {
     return res.status(500).json({ error: 'Server is not configured (missing API key).' })
   }
@@ -67,6 +68,8 @@ export default async function handler(req, res) {
     })
 
     if (!upstream.ok) {
+      const errBody = await upstream.text().catch(() => '')
+      console.error('Gemini API error', upstream.status, errBody.slice(0, 500))
       if (upstream.status === 429) {
         return res
           .status(429)
@@ -86,7 +89,8 @@ export default async function handler(req, res) {
     }
 
     return res.status(200).json({ notes })
-  } catch {
+  } catch (err) {
+    console.error('Generate handler failed:', err)
     return res.status(502).json({ error: 'Could not reach the AI service. Please try again.' })
   }
 }
