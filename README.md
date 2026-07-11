@@ -33,16 +33,21 @@ npm run build
 
 Output goes to `dist/` — deploy it to any static host.
 
-## ⚠️ Before going live: protect your API key
+## Deployment (Vercel)
 
-Any `VITE_*` variable is bundled into the browser JavaScript, so the Gemini key
-is **visible to every visitor** and could be abused. Fine for development, not
-for production. Before launch:
+The app is deployed on Vercel. The Gemini key is stored server-side as the
+`GEMINI_API_KEY` environment variable and used only by the serverless function
+in [api/generate.js](api/generate.js) — it is never shipped to the browser.
 
-1. Create a small backend endpoint (Node/Express, a serverless function, or a
-   route on your existing site) that holds the key and forwards requests to Gemini.
-2. Point the frontend at it — [src/services/gemini.js](src/services/gemini.js)
-   is the **only** file that needs to change (swap `API_URL` and remove the key header).
+To redeploy after changes:
+
+```bash
+npx vercel --prod
+```
+
+Note: in local dev (`npm run dev`) there is no serverless runtime, so the app
+falls back to calling Gemini directly with `VITE_GEMINI_API_KEY` from `.env`
+(dev-only; that key stays on your machine and is git-ignored).
 
 ## Project structure
 
@@ -55,8 +60,10 @@ src/
     NotesGenerator.jsx        The tool: paste/upload tabs, style picker, generate
     NotesOutput.jsx           Rendered notes with copy / download / reset
   services/
-    gemini.js                 AI call (swap this file for your backend later)
+    gemini.js                 Calls /api/generate (dev fallback: direct Gemini)
     fileParser.js             PDF/DOCX/TXT text extraction (lazy-loaded, in-browser)
+api/
+  generate.js                 Vercel serverless function holding the Gemini key
 ```
 
 ## Features
