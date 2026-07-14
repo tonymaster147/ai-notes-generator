@@ -66,24 +66,39 @@ export default function App() {
       <Header />
 
       <main>
-        <section className="hero">
-          <div className="container hero-grid">
-            <div className="hero-panel">
-              <h1>AI Notes Generator</h1>
-              <p className="hero-tagline">
-                Convert any material into clear notes within minutes. Learn
-                faster and better by organizing information and highlighting
-                key concepts.
-              </p>
-              <ul className="hero-points">
-                <li>✔ Paste text or upload PDF &amp; DOCX</li>
-                <li>✔ Four note styles, including flashcards</li>
-                <li>✔ Copy or download your notes instantly</li>
-              </ul>
+        <section className="banner">
+          <div className="container banner-inner">
+            <span className="banner-ribbon">
+              ⚡ Powered by Advanced AI — Summarise, Organise, and Learn Faster
+            </span>
+            <h1>
+              Free AI Notes Generator: Transform Raw Text into Smart Study
+              Notes
+            </h1>
+            <p className="banner-sub">
+              Use our free tool to instantly convert lectures, messy
+              transcripts, and long documents into beautifully structured,
+              easy-to-read notes. Need help turning your notes into a top-tier
+              essay or project? Get expert academic support to smash your
+              goals.
+            </p>
+            <div className="banner-ctas">
+              <a className="btn-cta btn-cta-primary" href="#tool">
+                Generate AI Notes Now
+              </a>
+              <a
+                className="btn-cta btn-cta-outline"
+                href="https://www.assignments4u.com/sign-up/"
+              >
+                Get Academic Help
+              </a>
             </div>
-            <div className="hero-tool">
-              <NotesGenerator />
-            </div>
+          </div>
+        </section>
+
+        <section className="tool-section" id="tool">
+          <div className="container tool-wrap">
+            <NotesGenerator />
           </div>
         </section>
 
