@@ -11,7 +11,7 @@ export default function Logo({ height = 30 }) {
       style={{ display: 'inline-flex', alignItems: 'center' }}
     >
       <img
-        src="/logo-light.png"
+        src={`${import.meta.env.BASE_URL}logo-light.png`}
         alt="Assignments4U"
         height={height}
         style={{ display: 'block', width: 'auto' }}
