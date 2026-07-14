@@ -35,11 +35,12 @@ Output goes to `dist/` — deploy it to any static host.
 
 ## Deployment (Vercel)
 
-The app is deployed on Vercel. The Gemini key is stored server-side as the
-`GEMINI_API_KEY` environment variable and used only by the serverless function
-in [api/generate.js](api/generate.js) — it is never shipped to the browser.
+The app is built for Vercel hosting. The Gemini key must be stored server-side
+as the `GEMINI_API_KEY` environment variable (Project Settings → Environment
+Variables) and is used only by the serverless function in
+[api/generate.js](api/generate.js) — it is never shipped to the browser.
 
-To redeploy after changes:
+To deploy:
 
 ```bash
 npx vercel --prod

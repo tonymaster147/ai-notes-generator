@@ -1,25 +1,49 @@
-import Logo from './Logo.jsx'
+const TOOLS = [
+  { label: 'Spell Checker', href: 'https://www.assignments4u.com/spell-checker/' },
+  { label: 'Grammar Checker', href: 'https://www.assignments4u.com/grammar-checker/' },
+  { label: 'Factoring Calculator', href: 'https://www.assignments4u.com/factoring-calculator/' },
+  { label: 'Plagiarism Checker', href: 'https://www.assignments4u.com/plagiarism-checker/' },
+]
+
+function CheckIcon() {
+  return (
+    <svg width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true">
+      <circle cx="13" cy="13" r="13" fill="var(--a4u-primary)" />
+      <path
+        d="m7.5 13.2 3.6 3.6 7.4-7.4"
+        stroke="#fff"
+        strokeWidth="2.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        fill="none"
+      />
+    </svg>
+  )
+}
 
 export default function Footer() {
   return (
-    <footer className="site-footer">
-      <div className="container footer-inner">
-        <div className="footer-brand">
-          <Logo height={28} />
-          <p>
-            Helping students learn faster with expert academic support and free
-            AI-powered study tools.
-          </p>
+    <footer>
+      <section className="tools-section">
+        <div className="container">
+          <h2 className="tools-title">Other Free Tools We Provide</h2>
+          <ul className="tools-grid">
+            {TOOLS.map((tool) => (
+              <li key={tool.label}>
+                <a href={tool.href}>
+                  <CheckIcon />
+                  {tool.label}
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
-        <nav className="footer-links" aria-label="Footer">
-          <a href="https://www.assignments4u.com/">Home</a>
-          <a href="https://www.assignments4u.com/services/">Services</a>
-          <a href="https://www.assignments4u.com/reviews/">Reviews</a>
-          <a href="https://www.assignments4u.com/contact-us/">Contact</a>
-        </nav>
-      </div>
-      <div className="container footer-copy">
-        © {new Date().getFullYear()} Assignments4U. All rights reserved.
+      </section>
+      <div className="footer-bar">
+        <div className="container">
+          Assignments4u.com Copyright © 2013-{new Date().getFullYear()} All
+          Rights Reserved.
+        </div>
       </div>
     </footer>
   )
