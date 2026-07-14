@@ -16,11 +16,11 @@ export default function NotesOutput({ notes, onReset }) {
   }
 
   const handleDownload = () => {
-    const blob = new Blob([notes], { type: 'text/markdown;charset=utf-8' })
+    const blob = new Blob([notes], { type: 'text/plain;charset=utf-8' })
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
     a.href = url
-    a.download = 'notes.md'
+    a.download = 'notes.txt'
     a.click()
     URL.revokeObjectURL(url)
   }
@@ -34,7 +34,7 @@ export default function NotesOutput({ notes, onReset }) {
             {copied ? '✓ Copied' : 'Copy'}
           </button>
           <button className="btn btn-ghost btn-sm" onClick={handleDownload}>
-            Download .md
+            Download .txt
           </button>
           <button className="btn btn-outline btn-sm" onClick={onReset}>
             New notes
