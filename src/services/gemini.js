@@ -1,9 +1,10 @@
 /**
  * Note generation service.
  *
- * In production the browser calls our own serverless endpoint
- * (api/generate.js on Vercel), which holds the Gemini API key
- * server-side — the key is never shipped to visitors.
+ * In production the browser calls our own server-side endpoint
+ * (api/generate.php on the Assignments4U host, or api/generate.js
+ * on Vercel), which holds the Gemini API key server-side — the key
+ * is never shipped to visitors.
  *
  * During local development (`npm run dev`) there is no serverless
  * runtime, so if VITE_GEMINI_API_KEY is set in .env the browser
@@ -18,7 +19,7 @@ export async function generateNotes(sourceText, style = 'bullets') {
     return generateNotesDirect(sourceText, style)
   }
 
-  const res = await fetch('/api/generate', {
+  const res = await fetch(`${import.meta.env.BASE_URL}api/generate.php`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ text: sourceText, style }),

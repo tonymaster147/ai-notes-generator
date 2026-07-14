@@ -26,3 +26,7 @@ npm-debug.log*
 
 .vercel
 .env*
+
+# Server credentials and server-side config — never commit
+.claude/
+api/config.php
